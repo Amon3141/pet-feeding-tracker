@@ -227,14 +227,7 @@ public class Tracker {
         currentPet.feed(date, amount);
     }
 
-    private void doEditRecord() {
-        double amount = -1.0;
-
-        Date date = new Date();
-        String year = null;
-        String month = null;
-        String day = null;
-
+    private int preDoEditRecord() {
         int recordNum = -1;
 
         System.out.println("\nSelect the record number to edit:");
@@ -243,6 +236,19 @@ public class Tracker {
         if (recordNum == -1) {
             processRecordView();
         }
+
+        return recordNum
+    }
+
+    private void doEditRecord() {
+        double amount = -1.0;
+
+        Date date = new Date();
+        String year = null;
+        String month = null;
+        String day = null;
+
+        int recordNum = preDoEditRecord();
 
         System.out.println("\nEnter feeding record to edit:");
 
