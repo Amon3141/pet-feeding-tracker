@@ -162,4 +162,22 @@ public class MyPetsTest {
         assertEquals(150, pets1.getPetAtIndex(2).getTargetAmount());
         assertEquals(unit2, pets1.getPetAtIndex(2).getUnit());
     }
+
+    @Test
+    void testGetNumPetsEmpty() {
+        assertEquals(0, pets1.getNumPets());
+    }
+
+    @Test
+    void testGetNumPetsOne() {
+        pets1.addPet("Peter", 50, unit1);
+        assertEquals(1, pets1.getNumPets());
+    }
+
+    @Test
+    void testGetNumPetsMultiple() {
+        pets1.addPet("Peter", 50, unit1);
+        pets1.addPet("John", 150, unit1);
+        assertEquals(2, pets1.getNumPets());
+    }
 }
