@@ -237,7 +237,7 @@ public class Tracker {
             processRecordView();
         }
 
-        return recordNum
+        return recordNum;
     }
 
     private void doEditRecord() {
@@ -250,9 +250,8 @@ public class Tracker {
 
         int recordNum = preDoEditRecord();
 
-        System.out.println("\nEnter feeding record to edit:");
+        System.out.println("\nEnter feeding record to edit:\nHow much? (" + currentPet.getUnit() + ")");
 
-        System.out.println("\nHow much? (" + currentPet.getUnit() + ")");
         amount = Double.parseDouble(input.next());
         System.out.println("Date:");
         System.out.println("Year? (e.g. 2024)");
