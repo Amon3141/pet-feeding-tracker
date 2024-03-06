@@ -2,7 +2,11 @@ package model;
 
 import java.util.ArrayList;
 
-public class MyPets {
+import org.json.JSONArray;
+import org.json.JSONObject;
+import persistence.Writable;
+
+public class MyPets implements Writable {
     private ArrayList<Pet> myPets;
 
     //EFFECTS: creates a new list of pets
@@ -10,14 +14,12 @@ public class MyPets {
         myPets = new ArrayList<>();
     }
 
-    //REQUIRES: !this.contains(name), targetAmount >= 0
+    //REQUIRES: !this.contains(pet)
     //MODIFIES: this
-    //EFFECTS: adds a new pet with its name and targetAmount(unit) of
-    //         feeding per day
-    public void addPet(String name, double targetAmount, String unit) {
-        if (!contains(name)) {
-            Pet newPet = new Pet(name, targetAmount, unit);
-            myPets.add(newPet);
+    //EFFECTS: adds a new pet to myPets
+    public void addPet(Pet pet) {
+        if (!contains(pet)) {
+            myPets.add(pet);
         } //else {!!! throw Exception}
     }
 
@@ -34,12 +36,20 @@ public class MyPets {
         petToEdit.setUnit(newUnit);
     }
 
-    //REQUIES: there is no duplicates in myPets
-    //EFFECTS: returns true if a pet with name is contained in myPets.
-    //         returns false otherwise.
-    public boolean contains(String name) {
-        for (Pet pet: myPets) {
-            if (pet.getName().equals(name)) {
+    //REQUIRES: 1 <= petNum <= this.myPets.size()
+    //MODIFIES: this
+    //EFFECTS: deletes the Pet with petNum
+    public Pet deletePet(int petNum) {
+        int index = petNum - 1;
+        Pet deletedPet = this.myPets.remove(index);
+        return deletedPet;
+    }
+
+    //EFFECTS: returns true if a pet with the same name as the
+    //         provided pet exists
+    public boolean contains(Pet pet) {
+        for (Pet currentPet: myPets) {
+            if (currentPet.getName().equals(pet.getName())) {
                 return true;
             }
         }
@@ -47,7 +57,7 @@ public class MyPets {
     }
 
     //REQUIRES: 0 <= i <= myPets.size() - 1
-    //EFFECTS: gets the Pet at the idex in myPets
+    //EFFECTS: gets the Pet at the index in myPets
     public Pet getPetAtIndex(int i) {
         return this.myPets.get(i);
     }
@@ -59,5 +69,23 @@ public class MyPets {
 
     public ArrayList<Pet> getMyPets() {
         return this.myPets;
+    }
+
+    @Override
+    public JSONObject toJson() {
+        JSONObject petsObject = new JSONObject();
+        petsObject.put("pets", petsToJson());
+        return petsObject;
+    }
+
+    // EFFECTS: returns pets in this myPets as a JSON array
+    private JSONArray petsToJson() {
+        JSONArray petsArray = new JSONArray();
+
+        for (Pet pet : myPets) {
+            petsArray.put(pet.toJson());
+        }
+
+        return petsArray;
     }
 }

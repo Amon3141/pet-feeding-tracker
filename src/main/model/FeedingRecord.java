@@ -1,8 +1,13 @@
 package model;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
-public class FeedingRecord {
+import org.json.JSONObject;
+import persistence.Writable;
+
+public class FeedingRecord implements Writable {
+    private static final SimpleDateFormat SDF = new SimpleDateFormat("yyyy-MM-dd");
     private Date date;
     private double amount;
 
@@ -26,5 +31,14 @@ public class FeedingRecord {
 
     public double getAmount() {
         return this.amount;
+    }
+
+    @Override
+    public JSONObject toJson() {
+        JSONObject recordObject = new JSONObject();
+        String dateInString = SDF.format(date);
+        recordObject.put("date", dateInString);
+        recordObject.put("amount", amount);
+        return recordObject;
     }
 }

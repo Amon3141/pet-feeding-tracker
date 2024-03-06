@@ -3,7 +3,11 @@ package model;
 import java.util.ArrayList;
 import java.util.Date;
 
-public class Pet {
+import org.json.JSONArray;
+import org.json.JSONObject;
+import persistence.Writable;
+
+public class Pet implements Writable {
     private String name;
     private double targetAmount;
     private String unit;
@@ -18,12 +22,9 @@ public class Pet {
         feedingHistory = new ArrayList<>();
     }
 
-    //REQUIRES: amount >= 0
     //MODIFIES: this
-    //EFFECTS: add a new FeedingRecord to FeedingHistory with
-    //         date and amount
-    public void feed(Date date, double amount) {
-        FeedingRecord record = new FeedingRecord(date, amount);
+    //EFFECTS: add a new FeedingRecord to FeedingHistory
+    public void feed(FeedingRecord record) {
         feedingHistory.add(record);
     }
 
@@ -39,6 +40,16 @@ public class Pet {
         recordToEdit.setAmount(newAmount);
     }
 
+    public FeedingRecord deleteFeedingRecord(int recordNum) {
+        int index = recordNum - 1;
+        FeedingRecord deletedRecord = this.feedingHistory.remove(index);
+        return deletedRecord;
+    }
+
+    //EFFECTS: return the number of the feeding records
+    public int getNumFeedingRecord() {
+        return this.feedingHistory.size();
+    }
 
     public void setName(String name) {
         this.name = name;
@@ -66,6 +77,27 @@ public class Pet {
 
     public ArrayList<FeedingRecord> getFeedingHistory() {
         return this.feedingHistory;
+    }
+
+    @Override
+    public JSONObject toJson() {
+        JSONObject petObject = new JSONObject();
+        petObject.put("name", name);
+        petObject.put("targetAmount", targetAmount);
+        petObject.put("unit", unit);
+        petObject.put("feedingHistory", historyToJson());
+        return petObject;
+    }
+
+    // EFFECTS: returns feeding records in this pet as a JSON array
+    private JSONArray historyToJson() {
+        JSONArray feedingHistoryArray = new JSONArray();
+
+        for (FeedingRecord record : feedingHistory) {
+            feedingHistoryArray.put(record.toJson());
+        }
+
+        return feedingHistoryArray;
     }
 }
 
