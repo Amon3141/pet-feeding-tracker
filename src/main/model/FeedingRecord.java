@@ -6,6 +6,7 @@ import java.util.Date;
 import org.json.JSONObject;
 import persistence.Writable;
 
+// Represents the feeding record, containing the date of amount fo the feeding
 public class FeedingRecord implements Writable {
     private static final SimpleDateFormat SDF = new SimpleDateFormat("yyyy-MM-dd");
     private Date date;

@@ -6,6 +6,7 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 import persistence.Writable;
 
+// Represents the collection of pets.
 public class MyPets implements Writable {
     private ArrayList<Pet> myPets;
 

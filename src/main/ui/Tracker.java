@@ -12,6 +12,8 @@ import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.Date;
 
+// Represents the pet feeding tracker, interacting with user to display and manipulate
+// the info of pets (myPets).
 public class Tracker {
     private static final SimpleDateFormat SDF = new SimpleDateFormat("yyyy-MM-dd");
     private static final String JSON_STORE = "./data/mypets.json";
@@ -30,6 +32,9 @@ public class Tracker {
         loadDataView();
     }
 
+    // MODIFIES: this
+    // EFFECTS: let the user choose to load the data from the json file,
+    //          and if so load the data to myPets
     private void loadDataView() {
         System.out.println("\nLoad the previous data? [y/n]");
         String response = input.next();
@@ -43,6 +48,8 @@ public class Tracker {
         runTracker();
     }
 
+    // EFFECTS: let the user choose to save the data of myPets to
+    //          the json file, and if so save the data
     private void saveDataView() {
         System.out.println("\nSave the current data? [y/n]");
         String response = input.next();
@@ -52,6 +59,9 @@ public class Tracker {
         isRunning = false;
     }
 
+    // MODIFIES: this
+    // EFFECTS: until user decides to quit the app, displays main/record views
+    //          after they quit, print "Good Bye!"
     private void runTracker() {
 
         while (isRunning) {
@@ -65,8 +75,9 @@ public class Tracker {
         System.out.println("\nGood Bye!");
     }
 
-    //MODIFIES: this
-    //EFFECTS: displays all the pets. processes user input.
+    // REQUIRES: isMain = true
+    // MODIFIES: this
+    // EFFECTS: displays all the pets. processes user input.
     private void processMainView() {
         String command;
 
@@ -81,6 +92,8 @@ public class Tracker {
         }
     }
 
+    // MODIFIES: this
+    // EFFECTS: processes user input in the main view
     private void processCommandMain(String command) {
         if (command.equals("a")) {
             doAddPet();
@@ -95,6 +108,9 @@ public class Tracker {
         }
     }
 
+    // REQUIRES: isMain = false
+    // MODIFIES: this
+    // EFFECTS: displays all the feeding records. processes user input.
     private void processRecordView() {
         String command;
 
@@ -109,6 +125,8 @@ public class Tracker {
         }
     }
 
+    // MODIFIES: this
+    // EFFECTS: processes user input in the record view
     private void processCommandRecord(String command) {
         if (command.equals("a")) {
             doAddRecord();
@@ -124,7 +142,9 @@ public class Tracker {
         }
     }
 
-
+    // MODIFIES: this
+    // EFFECTS: initiate some class fields with default values and
+    //          class instances.
     private void init() {
         myPets = new MyPets();
         input = new Scanner(System.in);
@@ -137,6 +157,7 @@ public class Tracker {
         jsonReader = new JsonReader(JSON_STORE);
     }
 
+    // EFFECTS: displays the pet info and command menu
     private void displayMenuMain() {
         System.out.println("\nMy Pets");
         System.out.println("--------------------------------------------------");
@@ -150,6 +171,8 @@ public class Tracker {
         System.out.println("\tq -> quit");
     }
 
+
+    // EFFECTS: displays the feeding record and command menu
     private void displayMenuRecord() {
         System.out.println("\n" + currentPet.getName() + "'s Feeding History");
         System.out.println("----------------------------");
@@ -163,6 +186,8 @@ public class Tracker {
         System.out.println("\tq -> quit");
     }
 
+    // MODIFIES: this
+    // EFFECTS: interacts with the user to add a new pet
     private void doAddPet() {
         String name;
         double targetAmount;
@@ -180,6 +205,9 @@ public class Tracker {
         myPets.addPet(petToAdd);
     }
 
+    // REQUIRES: !myPets.getMyPets().isEmpty()
+    // MODIFIES: this
+    // EFFECTS: interacts with teh user to edit an existing pet
     private void doEditPet() {
         String name;
         double targetAmount;
@@ -203,6 +231,9 @@ public class Tracker {
         myPets.editPet(petNum, name, targetAmount, unit);
     }
 
+    // REQUIRES: !myPets.getMyPets().isEmpty()
+    // MODIFIES: this
+    // EFFECTS: interacts with the user to delete an existing pet
     private void doDeletePet() {
         System.out.println("\nSelect the pet number to delete info:");
 
@@ -225,6 +256,9 @@ public class Tracker {
         }
     }
 
+    // REQUIRES: !myPets.getMyPets().isEmpty()
+    // EFFECTS: let user select which pet's feeding history they want to view
+    //          and go to recordView
     private void toRecordView() {
         System.out.println("\nSelect the pet number to see the feeding history:");
 
@@ -238,12 +272,14 @@ public class Tracker {
         processRecordView();
     }
 
+    // EFFECTS: selects pet number within the range of pet array
     private int selectPet() {
         int petNum = -1;
 
         try {
             int inp = Integer.parseInt(input.next());
             if (inp <= 0 || inp > myPets.getNumPets()) {
+                // !!!
                 System.out.println("Not a valid number! Enter again. Enter \"b\" to go back.");
             } else {
                 petNum = inp;
@@ -255,6 +291,8 @@ public class Tracker {
         return petNum;
     }
 
+    // MODIFIES: this
+    // EFFECTS: interacts with the user to add a new feeding record
     private void doAddRecord() {
         Date date = new Date();
 
@@ -284,6 +322,7 @@ public class Tracker {
         currentPet.feed(recordToAdd);
     }
 
+    // EFFECTS: selects the record number to edit
     private int preDoEditRecord() {
         int recordNum = -1;
 
@@ -297,6 +336,9 @@ public class Tracker {
         return recordNum;
     }
 
+    // REQUIRES: !currentPet.getFeedingHistory().isEmpty()
+    // MODIFIES: this
+    // EFFECTS: interacts with the user to edit an existing feeding record
     private void doEditRecord() {
         Date date = new Date();
 
@@ -326,6 +368,9 @@ public class Tracker {
         currentPet.editFeedingRecord(recordNum, date, amount);
     }
 
+    // REQUIRES: !currentPet.getFeedingHistory().isEmpty()
+    // MODIFIES: this
+    // EFFECTS: interacts with the user to delete an existing feeding record
     private void doDeleteRecord() {
         System.out.println("\nSelect the record number to delete:");
 
@@ -348,6 +393,7 @@ public class Tracker {
         }
     }
 
+    // EFFECTS: selects the record number within the range of the feeding history array
     private int selectRecord() {
         ArrayList<FeedingRecord> history = currentPet.getFeedingHistory();
         int petNum = -1;
@@ -366,6 +412,7 @@ public class Tracker {
         return petNum;
     }
 
+    // EFFECTS: displays all the pet names along with pet number and petInfo.
     private void printPets() {
         ArrayList<Pet> petList = myPets.getMyPets();
 
@@ -379,7 +426,9 @@ public class Tracker {
         }
     }
 
-
+    // EFFECTS: creates a string of the pet info.
+    //          contains how much more feeding is needed for that pet,
+    //          and how much feeding the user has done today.
     private String petInfo(Pet pet) {
         String messageToUser = "Enough for today!";
         double current = getTodayTotalFeeding(pet);
@@ -400,6 +449,7 @@ public class Tracker {
     }
     */
 
+    // EFFECTS: sums up all the feeding amount given to the pet today
     private double getTodayTotalFeeding(Pet pet) {
         ArrayList<FeedingRecord> feedingHistory = pet.getFeedingHistory();
         double todayTotal = 0;
@@ -412,6 +462,7 @@ public class Tracker {
         return todayTotal;
     }
 
+    // EFFECTS: displays all the feeding records along with record number and recordInfo.
     private void printFeedingHistory() {
         ArrayList<FeedingRecord> history = currentPet.getFeedingHistory();
 
@@ -426,6 +477,9 @@ public class Tracker {
         }
     }
 
+    // EFFECTS: creates a string of the record info.
+    //          contains how much feeding is done,
+    //          and on what date it was done.
     private String recordInfo(FeedingRecord record, String unit) {
         String ret = record.getAmount() + unit + "\t"
                 + "(" + SDF.format(record.getDate()) + ")";

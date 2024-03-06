@@ -7,6 +7,8 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 import persistence.Writable;
 
+// Represents Pet, containing the name, targetAmount(unit) per day , and
+// feeding history (= list of feeding records)
 public class Pet implements Writable {
     private String name;
     private double targetAmount;
