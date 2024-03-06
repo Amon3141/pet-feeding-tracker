@@ -24,7 +24,7 @@ public class PetTest {
 
         try {
             date1 = SDF.parse("2024-01-01");
-            date1 = SDF.parse("2024-12-31");
+            date2 = SDF.parse("2024-12-31");
         } catch (ParseException e) {
             date1 = new Date();
             date2 = new Date();
