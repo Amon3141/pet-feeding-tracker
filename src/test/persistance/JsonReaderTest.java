@@ -11,6 +11,8 @@ import java.util.Date;
 import java.util.List;
 import java.util.ArrayList;
 
+import org.json.*;
+
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -46,6 +48,21 @@ public class JsonReaderTest extends JsonTest {
         try {
             MyPets myPets = reader.read();
             assertEquals(0, myPets.getNumPets());
+        } catch (IOException e) {
+            fail("Couldn't read from file");
+        }
+    }
+
+    @Test
+    void testReaderInvalidDate() {
+        JsonReader reader = new JsonReader("./data/testReaderInvalidDate.json");
+        try {
+            MyPets myPets = reader.read();
+            List<Pet> pets = myPets.getMyPets();
+            assertEquals(2, pets.size());
+            List<FeedingRecord> johnRecord = new ArrayList<>();
+            johnRecord.add(new FeedingRecord(date1, 5));
+            checkPet("John", 50, "g", johnRecord, pets.get(1));
         } catch (IOException e) {
             fail("Couldn't read from file");
         }
