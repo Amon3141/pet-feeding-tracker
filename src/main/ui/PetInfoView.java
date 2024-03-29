@@ -4,11 +4,13 @@ import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
 
+// Represents the view with Pet Info (AddPetView & EditPetView)
 public abstract class PetInfoView extends ViewAbstract {
     protected JTextField nameField;
     protected JTextField targetField;
     protected JTextField unitField;
 
+    //EFFECTS: instantiates the object
     public PetInfoView() {
         nameField = new JTextField();
         targetField = new JTextField();
@@ -17,6 +19,8 @@ public abstract class PetInfoView extends ViewAbstract {
         addComponents();
     }
 
+    //MODIFIES: this
+    //EFFECTS: add components to the view
     protected void addComponents() {
         JPanel form = getForm();
         JPanel footer = getFooter();
@@ -27,8 +31,10 @@ public abstract class PetInfoView extends ViewAbstract {
         add(rightSpacer, BorderLayout.LINE_END);
     }
 
+    //EFFECTS: creates the footer with appropriate buttons
     protected abstract JPanel getFooter();
 
+    //EFFECTS: creates the form that asks for name, target amount, and unit
     private JPanel getForm() {
         JPanel form = new JPanel();
         form.setLayout(new BoxLayout(form, BoxLayout.Y_AXIS));
@@ -45,6 +51,7 @@ public abstract class PetInfoView extends ViewAbstract {
         return form;
     }
 
+    //EFFECTS: creates the row inside the form
     private JPanel getRow(String labelText, JTextField textField) {
         JPanel row = new JPanel(new FlowLayout(FlowLayout.TRAILING, 10, 0));
 

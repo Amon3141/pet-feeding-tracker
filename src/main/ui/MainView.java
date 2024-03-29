@@ -10,12 +10,15 @@ import java.util.Date;
 
 // represents the main view with the list of pets
 public class MainView extends ViewAbstract {
+    //EFFECTS: instantiate the object
     public MainView() {
         this.frameTitle = "Pet Feeding Tracker";
         setLayout(new BorderLayout());
         addComponents();
     }
 
+    //MODIFIES: this
+    //EFFECTS: add components to the view
     protected void addComponents() {
         JPanel rows = getRows();
         JScrollPane petList = new JScrollPane(rows);
@@ -34,6 +37,7 @@ public class MainView extends ViewAbstract {
         add(footer, BorderLayout.PAGE_END);
     }
 
+    //EFFECTS: creates the panel containing the add button
     private JPanel getAddButtonPanel() {
         JButton addButton = getButton("Add");
         addButton.addActionListener(e -> viewController.navigateTo(new AddPetView()));
@@ -43,6 +47,7 @@ public class MainView extends ViewAbstract {
         return addButtonPanel;
     }
 
+    //EFFECTS: creates the footer
     private JPanel getFooter() {
         JPanel footer = new JPanel(new FlowLayout(FlowLayout.TRAILING));
         footer.setBorder(BorderFactory.createEmptyBorder());
@@ -54,6 +59,7 @@ public class MainView extends ViewAbstract {
         return footer;
     }
 
+    //EFFECTS: creates the rows of the pet list
     private JPanel getRows() {
         JPanel rows = new JPanel();
         rows.setLayout(new BoxLayout(rows, BoxLayout.Y_AXIS));
@@ -70,6 +76,7 @@ public class MainView extends ViewAbstract {
         return rows;
     }
 
+    //EFFECTS: creates the row with pet info
     private JPanel getRow(Pet pet) {
         String name = pet.getName();
         double targetAmount = pet.getTargetAmount();
@@ -99,6 +106,7 @@ public class MainView extends ViewAbstract {
         return row;
     }
 
+    //EFFECTS: creates the delete button
     private JButton getDeleteButton(Pet pet) {
         JButton deleteButton = getButton("Delete");
         deleteButton.addActionListener(e -> {
@@ -107,6 +115,7 @@ public class MainView extends ViewAbstract {
         return deleteButton;
     }
 
+    //EFFECTS: creates the edit button
     private JButton getEditPet(Pet pet) {
         JButton editButton = getButton("Edit");
         editButton.addActionListener(e -> {
@@ -115,6 +124,7 @@ public class MainView extends ViewAbstract {
         return editButton;
     }
 
+    //EFFECTS: creates the feed button
     private JButton getFeedButton(Pet pet) {
         JButton feedButton = getButton("Feed");
         feedButton.addActionListener(e -> {
@@ -123,12 +133,14 @@ public class MainView extends ViewAbstract {
         return feedButton;
     }
 
+    //EFFECTS: creates the button to view the feeding history
     private JButton getHistoryButton(Pet pet) {
         JButton historyButton = getButton("History");
         historyButton.addActionListener(e -> viewController.navigateTo(new HistoryView(pet)));
         return historyButton;
     }
 
+    //EFFECTS: creates the progress bar UI
     private void addProgressUI(JPanel panel, double currentAmount, double targetAmount, String unit) {
         JProgressBar progressBar = new JProgressBar(0, (int) targetAmount);
         progressBar.setValue((int) currentAmount);

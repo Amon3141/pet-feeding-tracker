@@ -8,9 +8,11 @@ import java.awt.*;
 import java.text.ParseException;
 import java.util.Date;
 
+// represents the view to feed a pet
 public class FeedView extends RecordInfoView {
     Pet pet;
 
+    // EFFECTS: instantiate an object
     public FeedView(Pet pet) {
         super(pet);
         this.pet = pet;
@@ -18,6 +20,7 @@ public class FeedView extends RecordInfoView {
         this.frameTitle = "Feed";
     }
 
+    //EFFECTS: create the footer
     @Override
     protected JPanel getFooter() {
         JPanel footer = new JPanel(new FlowLayout(FlowLayout.CENTER, 40, 40));
@@ -33,6 +36,7 @@ public class FeedView extends RecordInfoView {
         return footer;
     }
 
+    //EFFECTS: create the add button
     private JButton getAddButton() {
         JButton addButton = getButton("Feed");
         addButton.addActionListener(e -> {

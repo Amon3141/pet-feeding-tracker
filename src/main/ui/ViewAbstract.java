@@ -7,6 +7,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.text.SimpleDateFormat;
 
+// Represents the abstract framework of the views (JPanel) that are used in
+// the application, setting up basic fields like FONT and viewController.
 public abstract class ViewAbstract extends JPanel {
     protected static final SimpleDateFormat SDF = DateFormatter.SDF;
     protected static final Font FONT = new Font(Font.MONOSPACED, Font.PLAIN, 16);
@@ -14,6 +16,7 @@ public abstract class ViewAbstract extends JPanel {
     protected MyPets myPets = viewController.getMyPets();
     protected String frameTitle = "";
 
+    //EFFECTS: instantiates the object
     protected JButton getButton(String label) {
         JButton button = new JButton(label);
         button.setPreferredSize(new Dimension(90, 45));
@@ -21,19 +24,7 @@ public abstract class ViewAbstract extends JPanel {
         return button;
     }
 
-    /*
-    protected JButton getNavigationButton(String label, ViewAbstract nextView) {
-        JButton navigationButton = getButton(label);
-        navigationButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                viewController.navigateTo(nextView);
-            }
-        });
-        return navigationButton;
-    }
-    */
-
+    //EFFECTS: returns this.frameTitle
     public String getFrameTitle() {
         return this.frameTitle;
     }

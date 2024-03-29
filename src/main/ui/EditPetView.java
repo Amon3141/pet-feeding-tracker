@@ -5,9 +5,11 @@ import model.*;
 import java.awt.*;
 import javax.swing.*;
 
+// represents the view to edit a pet
 public class EditPetView extends PetInfoView {
     private final Pet pet;
 
+    //EFFECTS: instantiate an object
     public EditPetView(Pet pet) {
         super();
         this.pet = pet;
@@ -17,6 +19,7 @@ public class EditPetView extends PetInfoView {
         unitField.setText(pet.getUnit());
     }
 
+    //EFFECTS: create the footer with two buttons
     @Override
     protected JPanel getFooter() {
         JPanel footer = new JPanel(new FlowLayout(FlowLayout.CENTER, 40, 40));

@@ -8,9 +8,11 @@ import java.awt.*;
 import java.text.ParseException;
 import java.util.Date;
 
+// represents the view to edit a feeding record
 public class EditRecordView extends RecordInfoView {
     FeedingRecord record;
 
+    // EFFECTS: instantiates an object
     public EditRecordView(Pet pet, FeedingRecord record) {
         super(pet);
         this.record = record;
@@ -19,6 +21,7 @@ public class EditRecordView extends RecordInfoView {
         this.frameTitle = "Edit a Feeding Record";
     }
 
+    //EFFECTS: creates the footer
     @Override
     protected JPanel getFooter() {
         JPanel footer = new JPanel(new FlowLayout(FlowLayout.CENTER, 40, 40));
@@ -34,6 +37,7 @@ public class EditRecordView extends RecordInfoView {
         return footer;
     }
 
+    //EFFECTS: creates the save button
     private JButton getSaveButton() {
         JButton saveButton = getButton("Save");
         saveButton.addActionListener(e -> {

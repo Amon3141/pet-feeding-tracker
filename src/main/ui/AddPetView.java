@@ -5,12 +5,15 @@ import model.*;
 import java.awt.*;
 import javax.swing.*;
 
+// represents the view to add a pet
 public class AddPetView extends PetInfoView {
+    //EFFECTS: instantiate an object
     public AddPetView() {
         super();
         this.frameTitle = "Add a New Pet";
     }
 
+    //EFFECTS: create a footer with two buttons
     @Override
     protected JPanel getFooter() {
         JPanel footer = new JPanel(new FlowLayout(FlowLayout.CENTER, 40, 40));

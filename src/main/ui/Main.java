@@ -1,11 +1,11 @@
 package ui;
 
-// The main method called by the java program that instantiates the tracker.
+// The main method called by the java program that instantiates the viewController
 public class Main {
-    // EFFECTS: instantiates the pet feeding tracker application.
+    // EFFECTS: instantiate the pet feeding tracker application
     public static void main(String[] args) {
         ViewController viewController = ViewController.getInstance();
         viewController.run();
-        //new Tracker();
+        // new Tracker(); (for console-based application)
     }
 }

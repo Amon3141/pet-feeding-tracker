@@ -5,9 +5,11 @@ import model.Pet;
 import java.awt.*;
 import javax.swing.*;
 
+// represents the view to delete a pet
 public class DeleteView extends ViewAbstract {
     Pet pet;
 
+    //EFFECTS: instantiate an object
     public DeleteView(Pet pet) {
         this.pet = pet;
         this.frameTitle = "Delete a Pet";
@@ -15,6 +17,8 @@ public class DeleteView extends ViewAbstract {
         addComponents();
     }
 
+    //MODIFIES: this
+    //EFFECTS: add components to the view
     private void addComponents() {
         JLabel message = new JLabel("Are you sure you want to delete " + pet.getName() + "?");
         message.setFont(new Font(Font.MONOSPACED, Font.PLAIN, 18));
@@ -34,6 +38,7 @@ public class DeleteView extends ViewAbstract {
         add(buttons);
     }
 
+    // create a yes button
     private JButton getYesButton() {
         JButton yesButton = getButton("Yes");
         yesButton.addActionListener(e -> {
@@ -43,6 +48,7 @@ public class DeleteView extends ViewAbstract {
         return yesButton;
     }
 
+    // creates a cancel button
     private JButton getCancelButton() {
         JButton cancelButton = getButton("Cancel");
         cancelButton.addActionListener(e -> viewController.navigateTo(new MainView()));

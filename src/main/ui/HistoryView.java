@@ -6,9 +6,11 @@ import java.awt.*;
 import java.util.Date;
 import javax.swing.*;
 
+// Represents the view to display the feeding history
 public class HistoryView extends ViewAbstract {
     private final Pet pet;
 
+    //EFFECTS: instantiate an object
     public HistoryView(Pet pet) {
         this.pet = pet;
         this.frameTitle = pet.getName() + "'s Feeding History";
@@ -16,6 +18,8 @@ public class HistoryView extends ViewAbstract {
         addComponents();
     }
 
+    //MODIFIES: this
+    //EFFECTS: add components to the view
     private void addComponents() {
         JPanel rows = getRows();
         JScrollPane feedingHistory = new JScrollPane(rows);
@@ -26,6 +30,7 @@ public class HistoryView extends ViewAbstract {
         add(footer, BorderLayout.PAGE_END);
     }
 
+    //EFFECTS: create the footer
     private JPanel getFooter() {
         JPanel footer = new JPanel(new FlowLayout(FlowLayout.LEADING));
         footer.setBorder(BorderFactory.createEmptyBorder());
@@ -38,6 +43,7 @@ public class HistoryView extends ViewAbstract {
         return footer;
     }
 
+    //EFFECTS: create the rows of feeding history
     private JPanel getRows() {
         JPanel rows = new JPanel();
         rows.setLayout(new BoxLayout(rows, BoxLayout.Y_AXIS));
@@ -54,6 +60,7 @@ public class HistoryView extends ViewAbstract {
         return rows;
     }
 
+    //EFFECTS: creates the row of feeding history
     private JPanel getRow(FeedingRecord record) {
         Date date = record.getDate();
         double amount = record.getAmount();

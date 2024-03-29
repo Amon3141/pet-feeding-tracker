@@ -6,10 +6,12 @@ import javax.swing.*;
 import java.awt.*;
 import java.io.FileNotFoundException;
 
+// Represents the view to save the current data
 public class SaveView extends ViewAbstract {
     private final String destination = ViewController.JSON_STORE;
     private final JsonWriter jsonWriter;
 
+    //EFFECTS: instantiates the object
     public SaveView() {
         jsonWriter = new JsonWriter(destination);
         this.frameTitle = "Save Data";
@@ -17,8 +19,10 @@ public class SaveView extends ViewAbstract {
         addComponents();
     }
 
+    //MODIFIES: this
+    //EFFECTS: add components to the view
     private void addComponents() {
-        JLabel message = new JLabel("Do you want save the changes?");
+        JLabel message = new JLabel("Do you want to save the changes?");
         message.setFont(new Font(Font.MONOSPACED, Font.PLAIN, 18));
         JPanel messagePanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
         messagePanel.add(message);
@@ -33,11 +37,20 @@ public class SaveView extends ViewAbstract {
         buttons.add(noButton);
         buttons.add(yesButton);
 
+        JPanel imagePanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
+        JLabel imageLabel = new JLabel();
+        ImageIcon imageIcon = new ImageIcon(new ImageIcon("resources/turtle2.png")
+                .getImage().getScaledInstance(150, 150, Image.SCALE_DEFAULT));
+        imageLabel.setIcon(imageIcon);
+        imagePanel.add(imageLabel);
+
         add(Box.createVerticalGlue());
+        add(imagePanel);
         add(messagePanel);
         add(buttons);
     }
 
+    //EFFECTS: creates the cancel button
     private JButton getCancelButton() {
         JButton cancelButton = getButton("Cancel");
         cancelButton.addActionListener(e -> viewController.navigateTo(new MainView()));

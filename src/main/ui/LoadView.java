@@ -7,10 +7,12 @@ import javax.swing.*;
 import java.awt.*;
 import java.io.IOException;
 
+// Represents the view to load the data
 public class LoadView extends ViewAbstract {
     private final String destination = ViewController.JSON_STORE;
     private final JsonReader jsonReader;
 
+    //EFFECTS: instantiate the object
     public LoadView() {
         this.frameTitle = "Load Data";
         this.jsonReader = new JsonReader(destination);
@@ -18,6 +20,8 @@ public class LoadView extends ViewAbstract {
         addComponents();
     }
 
+    //MODIFIES: this
+    //EFFECTS: add components to the view
     private void addComponents() {
         JLabel message = new JLabel("Do you want to load the previous data?");
         message.setFont(new Font(Font.MONOSPACED, Font.PLAIN, 18));
@@ -32,11 +36,20 @@ public class LoadView extends ViewAbstract {
         buttons.add(noButton);
         buttons.add(yesButton);
 
+        JPanel imagePanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
+        JLabel imageLabel = new JLabel();
+        ImageIcon imageIcon = new ImageIcon(new ImageIcon("resources/turtle1.png").getImage()
+                .getScaledInstance(150, 150, Image.SCALE_DEFAULT));
+        imageLabel.setIcon(imageIcon);
+        imagePanel.add(imageLabel);
+
         add(Box.createVerticalGlue());
+        add(imagePanel);
         add(messagePanel);
         add(buttons);
     }
 
+    //EFFECTS: creates the no button
     private JButton getNoButton() {
         JButton noButton = getButton("No");
         noButton.addActionListener(e -> {
@@ -46,6 +59,7 @@ public class LoadView extends ViewAbstract {
         return noButton;
     }
 
+    //EFFECTS: creates the yes button
     private JButton getYesButton() {
         JButton yesButton = getButton("Yes");
         yesButton.addActionListener(e -> {
