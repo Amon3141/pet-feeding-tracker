@@ -15,7 +15,7 @@ import java.util.Date;
 // Represents the pet feeding tracker, interacting with user to display and manipulate
 // the info of pets (myPets).
 public class Tracker {
-    private static final SimpleDateFormat SDF = new SimpleDateFormat("yyyy-MM-dd");
+    private static SimpleDateFormat SDF = DateFormatter.SDF;
     private static final String JSON_STORE = "./data/mypets.json";
     private MyPets myPets;
     private Scanner input;

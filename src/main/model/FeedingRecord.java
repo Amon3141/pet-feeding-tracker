@@ -1,14 +1,14 @@
 package model;
 
-import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.text.SimpleDateFormat;
 
 import org.json.JSONObject;
 import persistence.Writable;
 
 // Represents the feeding record, containing the date of amount fo the feeding
 public class FeedingRecord implements Writable {
-    private static final SimpleDateFormat SDF = new SimpleDateFormat("yyyy-MM-dd");
+    private static SimpleDateFormat SDF = DateFormatter.SDF;
     private Date date;
     private double amount;
 

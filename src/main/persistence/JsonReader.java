@@ -1,5 +1,6 @@
 package persistence;
 
+import model.DateFormatter;
 import model.FeedingRecord;
 import model.Pet;
 import model.MyPets;
@@ -15,12 +16,13 @@ import org.json.*;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.ArrayList;
 
 // Represents a reader that reads workroom from JSON data stored in file
 // Some of the code snippets in this class are modelled from JsonSerializationDemo JsonReader
 // JsonSerializationDemo: https://github.students.cs.ubc.ca/CPSC210/JsonSerializationDemo
 public class JsonReader {
-    private static final SimpleDateFormat SDF = new SimpleDateFormat("yyyy-MM-dd");
+    private static SimpleDateFormat SDF = DateFormatter.SDF;
     private final String source;
 
     // EFFECTS: constructs reader to read from source file
@@ -85,6 +87,12 @@ public class JsonReader {
     // EFFECTS: parses FeedingRecord from JSON object and adds it to Pet
     private void addFeedingRecord(Pet pet, JSONObject recordObject) {
         String dateInString = recordObject.getString("date");
+        //String[] dateStringArray = dateInString.split("-", 0);
+        //int year = Integer.parseInt(dateStringArray[0]);
+        //int month = Integer.parseInt(dateStringArray[1]);
+        //int day = Integer.parseInt(dateStringArray[2]);
+        //Date date = new Date(2024, 3, 2);
+        //System.out.println(year + " " + month + " " + day);
         Date date = new Date();
         try {
             date = SDF.parse(dateInString);

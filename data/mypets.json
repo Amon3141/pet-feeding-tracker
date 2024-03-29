@@ -9,18 +9,50 @@
             {
                 "date": "2024-12-31",
                 "amount": 100
+            },
+            {
+                "date": "2024-03-28",
+                "amount": 5
             }
         ],
         "targetAmount": 10,
-        "name": "Peter"
+        "name": "Peterpan"
     },
     {
         "unit": "g",
-        "feedingHistory": [{
-            "date": "2024-01-01",
-            "amount": 5
-        }],
+        "feedingHistory": [
+            {
+                "date": "2024-01-01",
+                "amount": 5
+            },
+            {
+                "date": "2024-01-01",
+                "amount": 35
+            },
+            {
+                "date": "2024-03-28",
+                "amount": 35
+            }
+        ],
         "targetAmount": 50,
         "name": "John"
+    },
+    {
+        "unit": "L",
+        "feedingHistory": [],
+        "targetAmount": 50,
+        "name": "Amon"
+    },
+    {
+        "unit": "L",
+        "feedingHistory": [],
+        "targetAmount": 1000,
+        "name": "Hanny"
+    },
+    {
+        "unit": "b",
+        "feedingHistory": [],
+        "targetAmount": 8,
+        "name": "g"
     }
 ]}

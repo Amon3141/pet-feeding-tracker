@@ -4,6 +4,8 @@ package ui;
 public class Main {
     // EFFECTS: instantiates the pet feeding tracker application.
     public static void main(String[] args) {
-        new Tracker();
+        ViewController viewController = ViewController.getInstance();
+        viewController.run();
+        //new Tracker();
     }
 }
