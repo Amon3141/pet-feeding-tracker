@@ -1,21 +1,15 @@
 package ui;
 
-import model.*;
+import model.MyPets;
 import persistence.JsonReader;
-import persistence.JsonWriter;
 
-import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Date;
 import javax.swing.*;
+import java.awt.*;
+import java.io.IOException;
 
 public class LoadView extends ViewAbstract {
-    private final String destination = viewController.JSON_STORE;
-    private JsonReader jsonReader;
+    private final String destination = ViewController.JSON_STORE;
+    private final JsonReader jsonReader;
 
     public LoadView() {
         this.frameTitle = "Load Data";
@@ -45,24 +39,18 @@ public class LoadView extends ViewAbstract {
 
     private JButton getNoButton() {
         JButton noButton = getButton("No");
-        noButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                viewController.setMyPets(new MyPets());
-                viewController.navigateTo(new MainView());
-            }
+        noButton.addActionListener(e -> {
+            viewController.setMyPets(new MyPets());
+            viewController.navigateTo(new MainView());
         });
         return noButton;
     }
 
     private JButton getYesButton() {
         JButton yesButton = getButton("Yes");
-        yesButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                viewController.setMyPets(loadData());
-                viewController.navigateTo(new MainView());
-            }
+        yesButton.addActionListener(e -> {
+            viewController.setMyPets(loadData());
+            viewController.navigateTo(new MainView());
         });
         return yesButton;
     }

@@ -2,15 +2,13 @@ package ui;
 
 import persistence.JsonWriter;
 
-import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.io.FileNotFoundException;
 import javax.swing.*;
+import java.awt.*;
+import java.io.FileNotFoundException;
 
 public class SaveView extends ViewAbstract {
-    private final String destination = viewController.JSON_STORE;
-    private JsonWriter jsonWriter;
+    private final String destination = ViewController.JSON_STORE;
+    private final JsonWriter jsonWriter;
 
     public SaveView() {
         jsonWriter = new JsonWriter(destination);
@@ -42,34 +40,21 @@ public class SaveView extends ViewAbstract {
 
     private JButton getCancelButton() {
         JButton cancelButton = getButton("Cancel");
-        cancelButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                viewController.navigateTo(new MainView());
-            }
-        });
+        cancelButton.addActionListener(e -> viewController.navigateTo(new MainView()));
         return cancelButton;
     }
 
     private JButton getNoButton() {
         JButton noButton = getButton("No");
-        noButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                System.exit(0);
-            }
-        });
+        noButton.addActionListener(e -> System.exit(0));
         return noButton;
     }
 
     private JButton getYesButton() {
         JButton yesButton = getButton("Yes");
-        yesButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                saveData();
-                System.exit(0);
-            }
+        yesButton.addActionListener(e -> {
+            saveData();
+            System.exit(0);
         });
         return yesButton;
     }

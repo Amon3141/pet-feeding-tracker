@@ -1,13 +1,10 @@
 package ui;
 
 import model.Pet;
-import persistence.JsonWriter;
 
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.io.FileNotFoundException;
 import javax.swing.*;
+
 public class DeleteView extends ViewAbstract {
     Pet pet;
 
@@ -28,8 +25,6 @@ public class DeleteView extends ViewAbstract {
 
         JButton yesButton = getYesButton();
         JButton noButton = getCancelButton();
-        JButton cancelButton = getCancelButton();
-
 
         buttons.add(noButton);
         buttons.add(yesButton);
@@ -41,24 +36,16 @@ public class DeleteView extends ViewAbstract {
 
     private JButton getYesButton() {
         JButton yesButton = getButton("Yes");
-        yesButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                myPets.deletePet(myPets.getMyPets().indexOf(pet) + 1);
-                viewController.navigateTo(new MainView());
-            }
+        yesButton.addActionListener(e -> {
+            myPets.deletePet(myPets.getMyPets().indexOf(pet) + 1);
+            viewController.navigateTo(new MainView());
         });
         return yesButton;
     }
 
     private JButton getCancelButton() {
         JButton cancelButton = getButton("Cancel");
-        cancelButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                viewController.navigateTo(new MainView());
-            }
-        });
+        cancelButton.addActionListener(e -> viewController.navigateTo(new MainView()));
         return cancelButton;
     }
 }

@@ -39,20 +39,17 @@
     },
     {
         "unit": "L",
-        "feedingHistory": [],
+        "feedingHistory": [{
+            "date": "2024-03-29",
+            "amount": 33
+        }],
         "targetAmount": 50,
         "name": "Amon"
-    },
-    {
-        "unit": "L",
-        "feedingHistory": [],
-        "targetAmount": 1000,
-        "name": "Hanny"
     },
     {
         "unit": "b",
         "feedingHistory": [],
         "targetAmount": 8,
-        "name": "g"
+        "name": "grab"
     }
 ]}

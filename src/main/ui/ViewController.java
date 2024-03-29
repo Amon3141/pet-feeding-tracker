@@ -1,10 +1,6 @@
 package ui;
 
-import java.awt.*;
-import java.io.IOException;
-
 import model.*;
-import persistence.*;
 
 import javax.swing.*;
 
@@ -14,14 +10,11 @@ public class ViewController {
     public static final int HEIGHT = 600;
     public static final String JSON_STORE = "./data/mypets.json";
 
-    private JFrame frame;
+    private final JFrame frame;
     private MyPets myPets;
     private ViewAbstract currentPanel;
 
-    private JsonReader jsonReader;
-
     private ViewController() {
-        jsonReader = new JsonReader(JSON_STORE);
         frame = new JFrame();
         frame.setSize(WIDTH, HEIGHT);
         frame.setVisible(true);

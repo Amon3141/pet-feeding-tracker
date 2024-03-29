@@ -2,12 +2,9 @@ package ui;
 
 import model.DateFormatter;
 import model.MyPets;
-import model.Pet;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.text.SimpleDateFormat;
 
 public abstract class ViewAbstract extends JPanel {

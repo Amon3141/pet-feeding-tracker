@@ -5,8 +5,6 @@ import model.Pet;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.text.ParseException;
 import java.util.Date;
 
@@ -26,12 +24,7 @@ public class EditRecordView extends RecordInfoView {
         JPanel footer = new JPanel(new FlowLayout(FlowLayout.CENTER, 40, 40));
 
         JButton cancelButton = getButton("Cancel");
-        cancelButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                viewController.navigateTo(new HistoryView(pet));
-            }
-        });
+        cancelButton.addActionListener(e -> viewController.navigateTo(new HistoryView(pet)));
 
         JButton saveButton = getSaveButton();
 
@@ -43,21 +36,18 @@ public class EditRecordView extends RecordInfoView {
 
     private JButton getSaveButton() {
         JButton saveButton = getButton("Save");
-        saveButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                Date date;
-                try {
-                    date = SDF.parse(dateField.getText());
-                } catch (ParseException ex) {
-                    date = new Date();
-                    System.out.println("Couldn't parse the date string.");
-                }
-                double amount = Double.parseDouble(amountField.getText());
-                record.setDate(date);
-                record.setAmount(amount);
-                viewController.navigateTo(new HistoryView(pet));
+        saveButton.addActionListener(e -> {
+            Date date;
+            try {
+                date = SDF.parse(dateField.getText());
+            } catch (ParseException ex) {
+                date = new Date();
+                System.out.println("Couldn't parse the date string.");
             }
+            double amount = Double.parseDouble(amountField.getText());
+            record.setDate(date);
+            record.setAmount(amount);
+            viewController.navigateTo(new HistoryView(pet));
         });
         return saveButton;
     }

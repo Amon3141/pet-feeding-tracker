@@ -3,13 +3,11 @@ package ui;
 import model.*;
 
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.Date;
 import javax.swing.*;
 
 public class HistoryView extends ViewAbstract {
-    private Pet pet;
+    private final Pet pet;
 
     public HistoryView(Pet pet) {
         this.pet = pet;
@@ -33,12 +31,7 @@ public class HistoryView extends ViewAbstract {
         footer.setBorder(BorderFactory.createEmptyBorder());
 
         JButton backButton = getButton("Back");
-        backButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                viewController.navigateTo(new MainView());
-            }
-        });
+        backButton.addActionListener(e -> viewController.navigateTo(new MainView()));
 
         footer.add(backButton);
 
@@ -71,18 +64,13 @@ public class HistoryView extends ViewAbstract {
         row.setPreferredSize(new Dimension(30, 100));
 
         JButton editButton = getButton("Edit");
-        editButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                viewController.navigateTo(new EditRecordView(pet, record));
-            }
-        });
+        editButton.addActionListener(e -> viewController.navigateTo(new EditRecordView(pet, record)));
 
         String dateString = SDF.format(date);
         JLabel dateLabel = new JLabel(dateString);
         dateLabel.setFont(FONT);
 
-        JLabel amountLabel = new JLabel(Double.toString(amount) + unit);
+        JLabel amountLabel = new JLabel(amount + unit);
         amountLabel.setFont(FONT);
 
         row.add(editButton);

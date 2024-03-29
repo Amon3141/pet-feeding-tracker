@@ -15,7 +15,7 @@ import java.util.Date;
 // Represents the pet feeding tracker, interacting with user to display and manipulate
 // the info of pets (myPets).
 public class Tracker {
-    private static SimpleDateFormat SDF = DateFormatter.SDF;
+    private static final SimpleDateFormat SDF = DateFormatter.SDF;
     private static final String JSON_STORE = "./data/mypets.json";
     private MyPets myPets;
     private Scanner input;
@@ -95,16 +95,22 @@ public class Tracker {
     // MODIFIES: this
     // EFFECTS: processes user input in the main view
     private void processCommandMain(String command) {
-        if (command.equals("a")) {
-            doAddPet();
-        } else if (command.equals("e")) {
-            doEditPet();
-        } else if (command.equals("d")) {
-            doDeletePet();
-        } else if (command.equals("v")) {
-            toRecordView();
-        } else {
-            System.out.println("Invalid Operation.");
+        switch (command) {
+            case "a":
+                doAddPet();
+                break;
+            case "e":
+                doEditPet();
+                break;
+            case "d":
+                doDeletePet();
+                break;
+            case "v":
+                toRecordView();
+                break;
+            default:
+                System.out.println("Invalid Operation.");
+                break;
         }
     }
 
@@ -128,17 +134,23 @@ public class Tracker {
     // MODIFIES: this
     // EFFECTS: processes user input in the record view
     private void processCommandRecord(String command) {
-        if (command.equals("a")) {
-            doAddRecord();
-        } else if (command.equals("e")) {
-            doEditRecord();
-        } else if (command.equals("d")) {
-            doDeleteRecord();
-        } else if (command.equals("b")) {
-            currentPet = null;
-            isMain = true;
-        } else {
-            System.out.println("Invalid Operation.");
+        switch (command) {
+            case "a":
+                doAddRecord();
+                break;
+            case "e":
+                doEditRecord();
+                break;
+            case "d":
+                doDeleteRecord();
+                break;
+            case "b":
+                currentPet = null;
+                isMain = true;
+                break;
+            default:
+                System.out.println("Invalid Operation.");
+                break;
         }
     }
 
@@ -251,7 +263,7 @@ public class Tracker {
             System.out.println("Action cancelled. Going back to the main screen...");
             processMainView();
         } else {
-            System.out.println("Invalid Answer. Going bakc to the main screen...");
+            System.out.println("Invalid Answer. Going back to the main screen...");
             processMainView();
         }
     }

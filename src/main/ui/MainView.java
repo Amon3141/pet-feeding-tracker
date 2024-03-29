@@ -1,13 +1,12 @@
 package ui;
 
-import model.*;
+import model.FeedingRecord;
+import model.Pet;
 
+import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.Date;
-import javax.swing.*;
 
 // represents the main view with the list of pets
 public class MainView extends ViewAbstract {
@@ -37,12 +36,7 @@ public class MainView extends ViewAbstract {
 
     private JPanel getAddButtonPanel() {
         JButton addButton = getButton("Add");
-        addButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                viewController.navigateTo(new AddPetView());
-            }
-        });
+        addButton.addActionListener(e -> viewController.navigateTo(new AddPetView()));
         JPanel addButtonPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
         addButtonPanel.add(addButton);
 
@@ -54,12 +48,7 @@ public class MainView extends ViewAbstract {
         footer.setBorder(BorderFactory.createEmptyBorder());
 
         JButton quitButton = getButton("Quit");
-        quitButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                viewController.navigateTo(new SaveView());
-            }
-        });
+        quitButton.addActionListener(e -> viewController.navigateTo(new SaveView()));
         footer.add(quitButton);
 
         return footer;
@@ -91,7 +80,7 @@ public class MainView extends ViewAbstract {
         row.setLayout(new FlowLayout(FlowLayout.CENTER, 20, 0));
         row.setPreferredSize(new Dimension(30, 100));
 
-        JButton deleteButton = getDeleteButtn(pet);
+        JButton deleteButton = getDeleteButton(pet);
         JButton editButton = getEditPet(pet);
 
         JLabel nameLabel = new JLabel(name);
@@ -110,47 +99,33 @@ public class MainView extends ViewAbstract {
         return row;
     }
 
-    private JButton getDeleteButtn(Pet pet) {
+    private JButton getDeleteButton(Pet pet) {
         JButton deleteButton = getButton("Delete");
-        deleteButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                viewController.navigateTo(new DeleteView(pet)); //!!!
-            }
+        deleteButton.addActionListener(e -> {
+            viewController.navigateTo(new DeleteView(pet)); //!!!
         });
         return deleteButton;
     }
 
     private JButton getEditPet(Pet pet) {
         JButton editButton = getButton("Edit");
-        editButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                viewController.navigateTo(new EditPetView(pet)); //!!!
-            }
+        editButton.addActionListener(e -> {
+            viewController.navigateTo(new EditPetView(pet)); //!!!
         });
         return editButton;
     }
 
     private JButton getFeedButton(Pet pet) {
         JButton feedButton = getButton("Feed");
-        feedButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                viewController.navigateTo(new FeedView(pet)); //!!!
-            }
+        feedButton.addActionListener(e -> {
+            viewController.navigateTo(new FeedView(pet)); //!!!
         });
         return feedButton;
     }
 
     private JButton getHistoryButton(Pet pet) {
         JButton historyButton = getButton("History");
-        historyButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                viewController.navigateTo(new HistoryView(pet));
-            }
-        });
+        historyButton.addActionListener(e -> viewController.navigateTo(new HistoryView(pet)));
         return historyButton;
     }
 
@@ -161,7 +136,7 @@ public class MainView extends ViewAbstract {
         UIManager.put("ProgressBar.foreground", Color.GREEN);
         SwingUtilities.updateComponentTreeUI(progressBar);
 
-        String progressString = Double.toString(currentAmount) + unit + " / " + Double.toString(targetAmount) + unit;
+        String progressString = currentAmount + unit + " / " + targetAmount + unit;
         JLabel progressLabel = new JLabel(progressString);
         progressLabel.setFont(new Font(Font.MONOSPACED, Font.PLAIN, 13));
 
