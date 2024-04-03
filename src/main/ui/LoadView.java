@@ -28,7 +28,7 @@ public class LoadView extends ViewAbstract {
         JPanel messagePanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
         messagePanel.add(message);
 
-        JPanel buttons = new JPanel(new FlowLayout(FlowLayout.CENTER, 30, 0));
+        JPanel buttons = new JPanel(new FlowLayout(FlowLayout.CENTER, 40, 0));
 
         JButton yesButton = getYesButton();
         JButton noButton = getNoButton();

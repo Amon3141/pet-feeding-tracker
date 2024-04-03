@@ -73,6 +73,9 @@ public class HistoryView extends ViewAbstract {
         JButton editButton = getButton("Edit");
         editButton.addActionListener(e -> viewController.navigateTo(new EditRecordView(pet, record)));
 
+        JButton deleteButton = getButton("Delete");
+        deleteButton.addActionListener(e -> viewController.navigateTo(new DeleteRecordView(pet, record)));
+
         String dateString = SDF.format(date);
         JLabel dateLabel = new JLabel(dateString);
         dateLabel.setFont(FONT);
@@ -80,6 +83,7 @@ public class HistoryView extends ViewAbstract {
         JLabel amountLabel = new JLabel(amount + unit);
         amountLabel.setFont(FONT);
 
+        row.add(deleteButton);
         row.add(editButton);
         row.add(dateLabel);
         row.add(amountLabel);

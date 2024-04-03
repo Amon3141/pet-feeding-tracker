@@ -32,7 +32,7 @@ public class Pet implements Writable {
         feedingHistory.add(record);
 
         String addedRecordString = SDF.format(record.getDate()) + " " + record.getAmount() + getUnit();
-        String logString = "Added " + getName() + "'s feeding record: " + addedRecordString;
+        String logString = "Added " + getName() + "'s feeding record: " + addedRecordString + "\n";
         EventLog.getInstance().logEvent(new Event(logString));
     }
 
@@ -50,8 +50,8 @@ public class Pet implements Writable {
         recordToEdit.setAmount(newAmount);
 
         String postRecordString = SDF.format(recordToEdit.getDate()) + " " + recordToEdit.getAmount() + getUnit();
-        String logString = "Edited " + getName() + "'s feeding record: " + preRecordString + " -> " + postRecordString;
-        System.out.println(logString);
+        String logString = "Edited " + getName() + "'s feeding record: "
+                + preRecordString + " -> " + postRecordString + "\n";
         EventLog.getInstance().logEvent(new Event(logString));
     }
 
@@ -62,7 +62,7 @@ public class Pet implements Writable {
         FeedingRecord deletedRecord = this.feedingHistory.remove(recordNum);
 
         String deletedRecordString = SDF.format(deletedRecord.getDate()) + " " + deletedRecord.getAmount() + getUnit();
-        String logString = "Deleted " + getName() + "'s feeding record: " + deletedRecordString;
+        String logString = "Deleted " + getName() + "'s feeding record: " + deletedRecordString + "\n";
         EventLog.getInstance().logEvent(new Event(logString));
 
         return deletedRecord;

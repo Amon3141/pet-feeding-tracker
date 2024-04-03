@@ -32,3 +32,25 @@ User Stories:
 - the "Quit" button.
 - You can reload the state of my application by clicking the "Yes" button when asked to load the previous date when
 - first starting the application.
+
+# Phase 4: Task 2
+Tue Apr 02 22:20:56 PDT 2024
+Added a pet: Pet1 (100.0g / day)
+
+Tue Apr 02 22:21:07 PDT 2024
+Added a pet: Pet2 (50.0L / day)
+
+Tue Apr 02 22:21:16 PDT 2024
+Edited a pet: Pet2 (50.0L / day) -> Pet2 (70.0L / day)
+
+Tue Apr 02 22:21:33 PDT 2024
+Added Pet1's feeding record: 2024-04-02 50.0g
+
+Tue Apr 02 22:21:43 PDT 2024
+Edited Pet1's feeding record: 2024-04-02 50.0g -> 2024-04-02 60.0g
+
+Tue Apr 02 22:21:53 PDT 2024
+Deleted Pet1's feeding record: 2024-04-02 60.0g
+
+Tue Apr 02 22:21:57 PDT 2024
+Deleted a pet: Pet2 (70.0L / day)

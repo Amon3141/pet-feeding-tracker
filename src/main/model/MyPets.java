@@ -23,7 +23,7 @@ public class MyPets implements Writable {
             myPets.add(pet);
 
             String addedPetString = pet.getName() + " (" + pet.getTargetAmount() + pet.getUnit() + " / day)";
-            String logString = "Added a pet: " + addedPetString;
+            String logString = "Added a pet: " + addedPetString + "\n";
             EventLog.getInstance().logEvent(new Event(logString));
         } //else {!!! throw Exception}
     }
@@ -45,7 +45,7 @@ public class MyPets implements Writable {
 
         String postPetString = petToEdit.getName() + " (" + petToEdit.getTargetAmount()
                 + petToEdit.getUnit() + " / day)";
-        String logString = "Edited a pet: " + prePetString + " -> " + postPetString;
+        String logString = "Edited a pet: " + prePetString + " -> " + postPetString + "\n";
         EventLog.getInstance().logEvent(new Event(logString));
     }
 
@@ -57,7 +57,7 @@ public class MyPets implements Writable {
 
         String deletedPetString = deletedPet.getName() + " (" + deletedPet.getTargetAmount()
                 + deletedPet.getUnit() + " / day)";
-        String logString = "Deleted a pet: " + deletedPetString;
+        String logString = "Deleted a pet: " + deletedPetString + "\n";
         EventLog.getInstance().logEvent(new Event(logString));
 
         return deletedPet;

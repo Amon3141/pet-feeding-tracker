@@ -1,18 +1,21 @@
 package ui;
 
+import model.FeedingRecord;
 import model.Pet;
 
 import java.awt.*;
 import javax.swing.*;
 
-// represents the view to delete a pet
-public class DeletePetView extends ViewAbstract {
+// represents the view to delete a record
+public class DeleteRecordView extends ViewAbstract {
     Pet pet;
+    FeedingRecord record;
 
     //EFFECTS: instantiate an object
-    public DeletePetView(Pet pet) {
+    public DeleteRecordView(Pet pet, FeedingRecord record) {
         this.pet = pet;
-        this.frameTitle = "Delete a Pet";
+        this.record = record;
+        this.frameTitle = "Delete a Record";
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         addComponents();
     }
@@ -20,7 +23,8 @@ public class DeletePetView extends ViewAbstract {
     //MODIFIES: this
     //EFFECTS: add components to the view
     private void addComponents() {
-        JLabel message = new JLabel("Are you sure you want to delete " + pet.getName() + "?");
+        JLabel message = new JLabel("Are you sure you want to delete "
+                + SDF.format(record.getDate()) + " " + record.getAmount() + pet.getUnit() + "?");
         message.setFont(new Font(Font.MONOSPACED, Font.PLAIN, 18));
         JPanel messagePanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
         messagePanel.add(message);
@@ -42,8 +46,8 @@ public class DeletePetView extends ViewAbstract {
     private JButton getYesButton() {
         JButton yesButton = getButton("Yes");
         yesButton.addActionListener(e -> {
-            myPets.deletePet(myPets.getMyPets().indexOf(pet));
-            viewController.navigateTo(new MainView());
+            pet.deleteFeedingRecord(pet.getFeedingHistory().indexOf(record));
+            viewController.navigateTo(new HistoryView(pet));
         });
         return yesButton;
     }
@@ -51,7 +55,7 @@ public class DeletePetView extends ViewAbstract {
     // creates a cancel button
     private JButton getCancelButton() {
         JButton cancelButton = getButton("Cancel");
-        cancelButton.addActionListener(e -> viewController.navigateTo(new MainView()));
+        cancelButton.addActionListener(e -> viewController.navigateTo(new HistoryView(pet)));
         return cancelButton;
     }
 }
