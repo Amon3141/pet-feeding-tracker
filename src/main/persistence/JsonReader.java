@@ -21,8 +21,8 @@ import java.util.Date;
 // Some of the code snippets in this class are modelled from JsonSerializationDemo JsonReader
 // JsonSerializationDemo: https://github.students.cs.ubc.ca/CPSC210/JsonSerializationDemo
 public class JsonReader {
-    private static SimpleDateFormat SDF = DateFormatter.SDF;
-    private final String source;
+    private static final SimpleDateFormat SDF = DateFormatter.SDF;
+    private String source;
 
     // EFFECTS: constructs reader to read from source file
     public JsonReader(String source) {

@@ -56,3 +56,21 @@ Tue Apr 02 22:21:57 PDT 2024
 Deleted a pet: Pet2 (70.0L / day)
 
 # Phase 4: Task 3
+Possible Refactoring Ideas
+1. Introduce a singleton pattern to MyPets class. Because MyPets 
+is a class representing the list of all the pets, it always has 
+only one instance. While right now, each view class accesses MyPets' 
+unique instance by sharing the private field that exists in the 
+ViewController class, I could also add a singleton design pattern to the
+MyPets class. By doing so, the relationship between ViewController and
+MyPets can be cut, reducing the coupling in the system.
+2. Introduce an observer pattern for updating pet information. Right now,
+the system updates the currentPet and currentRecord (Pet and Record whose
+information is displayed on the screen) whenever we navigate to another view
+by manually calling the setter function in ViewController (because those 
+two fields exist in ViewController). I could introduce an observer pattern, 
+where ViewController is Observer and each View is Observable, and everytime
+we navigate to another view, the observer can be notified to update the values
+of currentPet and currentRecord. By doing so, I can reduce the duplicate code
+of updating the current values and define the updating process only in
+the update method that I would add in ViewController.
