@@ -7,11 +7,8 @@ import javax.swing.*;
 
 // represents the view to delete a pet
 public class DeletePetView extends ViewAbstract {
-    Pet pet;
-
     //EFFECTS: instantiate an object
-    public DeletePetView(Pet pet) {
-        this.pet = pet;
+    public DeletePetView() {
         this.frameTitle = "Delete a Pet";
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         addComponents();
@@ -20,7 +17,7 @@ public class DeletePetView extends ViewAbstract {
     //MODIFIES: this
     //EFFECTS: add components to the view
     private void addComponents() {
-        JLabel message = new JLabel("Are you sure you want to delete " + pet.getName() + "?");
+        JLabel message = new JLabel("Are you sure you want to delete " + currentPet.getName() + "?");
         message.setFont(new Font(Font.MONOSPACED, Font.PLAIN, 18));
         JPanel messagePanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
         messagePanel.add(message);
@@ -42,7 +39,7 @@ public class DeletePetView extends ViewAbstract {
     private JButton getYesButton() {
         JButton yesButton = getButton("Yes");
         yesButton.addActionListener(e -> {
-            myPets.deletePet(myPets.getMyPets().indexOf(pet));
+            myPets.deletePet(myPets.getMyPets().indexOf(currentPet));
             viewController.navigateTo(new MainView());
         });
         return yesButton;

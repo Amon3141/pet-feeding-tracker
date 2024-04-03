@@ -10,12 +10,8 @@ import java.util.Date;
 
 // represents the view to feed a pet
 public class FeedView extends RecordInfoView {
-    Pet pet;
-
     // EFFECTS: instantiate an object
-    public FeedView(Pet pet) {
-        super(pet);
-        this.pet = pet;
+    public FeedView() {
         this.dateField.setText(SDF.format(new Date()));
         this.frameTitle = "Feed";
     }
@@ -49,7 +45,7 @@ public class FeedView extends RecordInfoView {
             }
             double amount = Double.parseDouble(amountField.getText());
             FeedingRecord recordToAdd = new FeedingRecord(date, amount);
-            pet.feed(recordToAdd);
+            currentPet.feed(recordToAdd);
             viewController.navigateTo(new MainView());
         });
         return addButton;

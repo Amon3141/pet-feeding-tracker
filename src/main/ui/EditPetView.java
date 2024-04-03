@@ -7,16 +7,13 @@ import javax.swing.*;
 
 // represents the view to edit a pet
 public class EditPetView extends PetInfoView {
-    private final Pet pet;
-
     //EFFECTS: instantiate an object
-    public EditPetView(Pet pet) {
+    public EditPetView() {
         super();
-        this.pet = pet;
         this.frameTitle = "Add a New Pet";
-        nameField.setText(pet.getName());
-        targetField.setText(Double.toString(pet.getTargetAmount()));
-        unitField.setText(pet.getUnit());
+        nameField.setText(currentPet.getName());
+        targetField.setText(Double.toString(currentPet.getTargetAmount()));
+        unitField.setText(currentPet.getUnit());
     }
 
     //EFFECTS: create the footer with two buttons
@@ -32,7 +29,7 @@ public class EditPetView extends PetInfoView {
             String name = nameField.getText();
             double targetAmount = Double.parseDouble(targetField.getText());
             String unit = unitField.getText();
-            int petIndex = myPets.getMyPets().indexOf(pet);
+            int petIndex = myPets.getMyPets().indexOf(currentPet);
             myPets.editPet(petIndex, name, targetAmount, unit);
             viewController.navigateTo(new MainView());
         });

@@ -8,8 +8,8 @@ import java.io.FileNotFoundException;
 
 // Represents the view to save the current data
 public class SaveView extends ViewAbstract {
-    private final String destination = ViewController.JSON_STORE;
-    private final JsonWriter jsonWriter;
+    private String destination = ViewController.JSON_STORE;
+    private JsonWriter jsonWriter;
 
     //EFFECTS: instantiates the object
     public SaveView() {
@@ -84,9 +84,9 @@ public class SaveView extends ViewAbstract {
             jsonWriter.open();
             jsonWriter.write(myPets);
             jsonWriter.close();
-            System.out.println("Saved Pet Information to " + destination);
+            //System.out.println("Saved Pet Information to " + destination);
         } catch (FileNotFoundException e) {
-            System.out.println("Unable to write to file: " + destination);
+            //System.out.println("Unable to write to file: " + destination);
         }
     }
 }

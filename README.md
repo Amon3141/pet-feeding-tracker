@@ -1,6 +1,6 @@
 # Pet Feeding Tacker
 
-## This application helps users who live with any animal to keep track of the feeding of their pets. As I myself have five turtles and a fish, I have experienced the difficulty of feeding different species of animals with the right.
+## This application helps users who live with any animal to keep track of the feeding of their pets. As I myself have five turtles and a fish, I have experienced the difficulty of feeding different species of animals with the right amount.
 
 User Stories:
 - As a user, I want to be able to add a record of feeding to the feeding data specific to an animal.
@@ -54,3 +54,5 @@ Deleted Pet1's feeding record: 2024-04-02 60.0g
 
 Tue Apr 02 22:21:57 PDT 2024
 Deleted a pet: Pet2 (70.0L / day)
+
+# Phase 4: Task 3

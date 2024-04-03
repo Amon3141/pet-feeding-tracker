@@ -1,9 +1,17 @@
-{"pets": [{
-    "unit": "g",
-    "feedingHistory": [{
-        "date": "2024-04-02",
-        "amount": 55
-    }],
-    "targetAmount": 100,
-    "name": "Johny"
-}]}
+{"pets": [
+    {
+        "unit": "g",
+        "feedingHistory": [{
+            "date": "2024-04-02",
+            "amount": 55
+        }],
+        "targetAmount": 100,
+        "name": "Johny"
+    },
+    {
+        "unit": "mL",
+        "feedingHistory": [],
+        "targetAmount": 50,
+        "name": "John"
+    }
+]}

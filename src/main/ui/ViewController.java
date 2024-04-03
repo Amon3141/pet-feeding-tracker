@@ -13,9 +13,12 @@ public class ViewController {
     public static final int HEIGHT = 600;
     public static final String JSON_STORE = "./data/mypets.json";
 
-    private final JFrame frame;
-    private MyPets myPets;
+    private JFrame frame;
     private ViewAbstract currentPanel;
+
+    private MyPets myPets;
+    private Pet currentPet;
+    private FeedingRecord currentRecord;
 
     //EFFECTS: instantiates the object
     private ViewController() {
@@ -72,9 +75,31 @@ public class ViewController {
         return this.myPets;
     }
 
+    //EFFECTS: returns this.currentPet
+    public Pet getCurrentPet() {
+        return this.currentPet;
+    }
+
+    //EFFECTS: returns this.currentRecord
+    public FeedingRecord getCurrentRecord() {
+        return this.currentRecord;
+    }
+
     //MODIFIES: this
     //EFFECTS: set this.myPets to a new value
     public void setMyPets(MyPets myPets) {
         this.myPets = myPets;
+    }
+
+    //MODIFIES: this
+    //EFFECTS: set this.currentPet to a new value
+    public void setCurrentPet(Pet pet) {
+        this.currentPet = pet;
+    }
+
+    //MODIFIES: this
+    //EFFECTS: set this.currentRecord to a new value
+    public void setCurrentRecord(FeedingRecord record) {
+        this.currentRecord = record;
     }
 }

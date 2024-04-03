@@ -16,7 +16,6 @@ import org.json.*;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.ArrayList;
 
 // Represents a reader that reads workroom from JSON data stored in file
 // Some of the code snippets in this class are modelled from JsonSerializationDemo JsonReader

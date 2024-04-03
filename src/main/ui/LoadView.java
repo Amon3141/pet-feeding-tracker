@@ -9,8 +9,8 @@ import java.io.IOException;
 
 // Represents the view to load the data
 public class LoadView extends ViewAbstract {
-    private final String destination = ViewController.JSON_STORE;
-    private final JsonReader jsonReader;
+    private String destination = ViewController.JSON_STORE;
+    private JsonReader jsonReader;
 
     //EFFECTS: instantiate the object
     public LoadView() {
@@ -74,10 +74,10 @@ public class LoadView extends ViewAbstract {
         MyPets myPets;
         try {
             myPets = jsonReader.read();
-            System.out.println("Loaded pet information from " + destination);
+            //System.out.println("Loaded pet information from " + destination);
         } catch (IOException e) {
             myPets = new MyPets();
-            System.out.println("Unable to read from file: " + destination);
+            //System.out.println("Unable to read from file: " + destination);
         }
         return myPets;
     }

@@ -10,14 +10,11 @@ import java.util.Date;
 
 // represents the view to edit a feeding record
 public class EditRecordView extends RecordInfoView {
-    FeedingRecord record;
-
     // EFFECTS: instantiates an object
-    public EditRecordView(Pet pet, FeedingRecord record) {
-        super(pet);
-        this.record = record;
-        dateField.setText(SDF.format(record.getDate()));
-        amountField.setText(Double.toString(record.getAmount()));
+    public EditRecordView() {
+        super();
+        dateField.setText(SDF.format(currentRecord.getDate()));
+        amountField.setText(Double.toString(currentRecord.getAmount()));
         this.frameTitle = "Edit a Feeding Record";
     }
 
@@ -27,7 +24,7 @@ public class EditRecordView extends RecordInfoView {
         JPanel footer = new JPanel(new FlowLayout(FlowLayout.CENTER, 40, 40));
 
         JButton cancelButton = getButton("Cancel");
-        cancelButton.addActionListener(e -> viewController.navigateTo(new HistoryView(pet)));
+        cancelButton.addActionListener(e -> viewController.navigateTo(new HistoryView()));
 
         JButton saveButton = getSaveButton();
 
@@ -49,9 +46,9 @@ public class EditRecordView extends RecordInfoView {
                 System.out.println("Couldn't parse the date string.");
             }
             double amount = Double.parseDouble(amountField.getText());
-            int recordIndex = pet.getFeedingHistory().indexOf(record);
-            pet.editFeedingRecord(recordIndex, date, amount);
-            viewController.navigateTo(new HistoryView(pet));
+            int recordIndex = currentPet.getFeedingHistory().indexOf(currentRecord);
+            currentPet.editFeedingRecord(recordIndex, date, amount);
+            viewController.navigateTo(new HistoryView());
         });
         return saveButton;
     }

@@ -9,13 +9,11 @@ import java.awt.*;
 // Represents the view with Feeding Record Info
 // (FeedView & EditRecordView)
 public abstract class RecordInfoView extends ViewAbstract {
-    Pet pet;
     protected JTextField dateField;
     protected JTextField amountField;
 
     //EFFECTS: instantiates the object
-    public RecordInfoView(Pet pet) {
-        this.pet = pet;
+    public RecordInfoView() {
         dateField = new JTextField();
         amountField = new JTextField();
         setLayout(new BorderLayout());

@@ -110,7 +110,8 @@ public class MainView extends ViewAbstract {
     private JButton getDeleteButton(Pet pet) {
         JButton deleteButton = getButton("Delete");
         deleteButton.addActionListener(e -> {
-            viewController.navigateTo(new DeletePetView(pet)); //!!!
+            viewController.setCurrentPet(pet);
+            viewController.navigateTo(new DeletePetView()); //!!!
         });
         return deleteButton;
     }
@@ -119,7 +120,8 @@ public class MainView extends ViewAbstract {
     private JButton getEditPet(Pet pet) {
         JButton editButton = getButton("Edit");
         editButton.addActionListener(e -> {
-            viewController.navigateTo(new EditPetView(pet)); //!!!
+            viewController.setCurrentPet(pet);
+            viewController.navigateTo(new EditPetView()); //!!!
         });
         return editButton;
     }
@@ -128,7 +130,8 @@ public class MainView extends ViewAbstract {
     private JButton getFeedButton(Pet pet) {
         JButton feedButton = getButton("Feed");
         feedButton.addActionListener(e -> {
-            viewController.navigateTo(new FeedView(pet)); //!!!
+            viewController.setCurrentPet(pet);
+            viewController.navigateTo(new FeedView()); //!!!
         });
         return feedButton;
     }
@@ -136,7 +139,10 @@ public class MainView extends ViewAbstract {
     //EFFECTS: creates the button to view the feeding history
     private JButton getHistoryButton(Pet pet) {
         JButton historyButton = getButton("History");
-        historyButton.addActionListener(e -> viewController.navigateTo(new HistoryView(pet)));
+        historyButton.addActionListener(e -> {
+            viewController.setCurrentPet(pet);
+            viewController.navigateTo(new HistoryView());
+        });
         return historyButton;
     }
 

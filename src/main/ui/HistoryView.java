@@ -8,12 +8,9 @@ import javax.swing.*;
 
 // Represents the view to display the feeding history
 public class HistoryView extends ViewAbstract {
-    private final Pet pet;
-
     //EFFECTS: instantiate an object
-    public HistoryView(Pet pet) {
-        this.pet = pet;
-        this.frameTitle = pet.getName() + "'s Feeding History";
+    public HistoryView() {
+        this.frameTitle = currentPet.getName() + "'s Feeding History";
         setLayout(new BorderLayout());
         addComponents();
     }
@@ -50,7 +47,7 @@ public class HistoryView extends ViewAbstract {
 
         rows.add(Box.createVerticalGlue());
 
-        for (FeedingRecord record : pet.getFeedingHistory()) {
+        for (FeedingRecord record : currentPet.getFeedingHistory()) {
             JPanel row = getRow(record);
             rows.add(row);
         }
@@ -64,17 +61,15 @@ public class HistoryView extends ViewAbstract {
     private JPanel getRow(FeedingRecord record) {
         Date date = record.getDate();
         double amount = record.getAmount();
-        String unit = pet.getUnit();
+        String unit = currentPet.getUnit();
 
         JPanel row = new JPanel();
         row.setLayout(new FlowLayout(FlowLayout.CENTER, 20, 0));
         row.setPreferredSize(new Dimension(30, 100));
 
-        JButton editButton = getButton("Edit");
-        editButton.addActionListener(e -> viewController.navigateTo(new EditRecordView(pet, record)));
+        JButton editButton = getEditButton(record);
 
-        JButton deleteButton = getButton("Delete");
-        deleteButton.addActionListener(e -> viewController.navigateTo(new DeleteRecordView(pet, record)));
+        JButton deleteButton = getDeleteButton(record);
 
         String dateString = SDF.format(date);
         JLabel dateLabel = new JLabel(dateString);
@@ -89,5 +84,25 @@ public class HistoryView extends ViewAbstract {
         row.add(amountLabel);
 
         return row;
+    }
+
+    //EFFECTS: creates the delete button
+    private JButton getDeleteButton(FeedingRecord record) {
+        JButton deleteButton = getButton("Delete");
+        deleteButton.addActionListener(e -> {
+            viewController.setCurrentRecord(record);
+            viewController.navigateTo(new DeleteRecordView());
+        });
+        return deleteButton;
+    }
+
+    //EFFECTS: creates the edit button
+    private JButton getEditButton(FeedingRecord record) {
+        JButton editButton = getButton("Edit");
+        editButton.addActionListener(e -> {
+            viewController.setCurrentRecord(record);
+            viewController.navigateTo(new EditRecordView());
+        });
+        return editButton;
     }
 }
