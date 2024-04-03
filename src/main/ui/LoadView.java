@@ -69,6 +69,7 @@ public class LoadView extends ViewAbstract {
         return yesButton;
     }
 
+    //EFFECTS: loads the previous data
     private MyPets loadData() {
         MyPets myPets;
         try {

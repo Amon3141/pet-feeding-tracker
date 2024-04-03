@@ -1,5 +1,6 @@
 package model;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -10,6 +11,7 @@ import persistence.Writable;
 // Represents Pet, containing the name, targetAmount(unit) per day , and
 // feeding history (= list of feeding records)
 public class Pet implements Writable {
+    private static final SimpleDateFormat SDF = DateFormatter.SDF;
     private String name;
     private double targetAmount;
     private String unit;
@@ -28,23 +30,41 @@ public class Pet implements Writable {
     //EFFECTS: add a new FeedingRecord to FeedingHistory
     public void feed(FeedingRecord record) {
         feedingHistory.add(record);
+
+        String addedRecordString = SDF.format(record.getDate()) + " " + record.getAmount() + getUnit();
+        String logString = "Added " + getName() + "'s feeding record: " + addedRecordString;
+        EventLog.getInstance().logEvent(new Event(logString));
     }
 
-    //REQUIRES:  1 <= recordNum <= feedingHistory.size(), amount >= 0,
+    //REQUIRES:  0 <= recordNum <= feedingHistory.size()-1, amount >= 0,
     //           !this.feedingHistory.isEmpty
     //MODIFIES: this
     //EFFECTS: edit feedingHistory[recordNum-1] with newDate and
     //         newAmount
     public void editFeedingRecord(int recordNum, Date newDate, double newAmount) {
-        int index = recordNum - 1;
-        FeedingRecord recordToEdit = this.feedingHistory.get(index);
+        FeedingRecord recordToEdit = this.feedingHistory.get(recordNum);
+
+        String preRecordString = SDF.format(recordToEdit.getDate()) + " " + recordToEdit.getAmount() + getUnit();
+
         recordToEdit.setDate(newDate);
         recordToEdit.setAmount(newAmount);
+
+        String postRecordString = SDF.format(recordToEdit.getDate()) + " " + recordToEdit.getAmount() + getUnit();
+        String logString = "Edited " + getName() + "'s feeding record: " + preRecordString + " -> " + postRecordString;
+        System.out.println(logString);
+        EventLog.getInstance().logEvent(new Event(logString));
     }
 
+    //REQUIRES: 0 <= recordNum <= feedingHistory.size()-1, !this.feedingHitory.isEmpty
+    //MODIFIES: this
+    //EFFECTS: delete feedingHistory[recordNum-1]
     public FeedingRecord deleteFeedingRecord(int recordNum) {
-        int index = recordNum - 1;
-        FeedingRecord deletedRecord = this.feedingHistory.remove(index);
+        FeedingRecord deletedRecord = this.feedingHistory.remove(recordNum);
+
+        String deletedRecordString = SDF.format(deletedRecord.getDate()) + " " + deletedRecord.getAmount() + getUnit();
+        String logString = "Deleted " + getName() + "'s feeding record: " + deletedRecordString;
+        EventLog.getInstance().logEvent(new Event(logString));
+
         return deletedRecord;
     }
 
@@ -81,6 +101,7 @@ public class Pet implements Writable {
         return this.feedingHistory;
     }
 
+    //EFFECTS: returns JSONObject representing this Pet instance
     @Override
     public JSONObject toJson() {
         JSONObject petObject = new JSONObject();

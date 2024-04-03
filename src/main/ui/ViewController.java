@@ -3,6 +3,7 @@ package ui;
 import model.*;
 
 import javax.swing.*;
+import java.awt.event.WindowAdapter;
 
 // Represents the view controller that holds shared information and controls
 // which panel (page) is to be displayed at the time
@@ -23,6 +24,12 @@ public class ViewController {
         frame.setVisible(true);
         frame.setLocationRelativeTo(null);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.addWindowListener(new WindowAdapter() {
+            public void windowClosing(java.awt.event.WindowEvent e) {
+                logEvents();
+                System.exit(0);
+            }
+        });
     }
 
     //MODIFIES: this
@@ -51,6 +58,13 @@ public class ViewController {
             INSTANCE = new ViewController();
         }
         return INSTANCE;
+    }
+
+    //EFFECTS: logs the events using EventLog instance
+    public static void logEvents() {
+        for (Event ev : EventLog.getInstance()) {
+            System.out.println(ev.toString());
+        }
     }
 
     //EFFECTS: returns this.myPets

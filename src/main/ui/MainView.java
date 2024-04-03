@@ -110,7 +110,7 @@ public class MainView extends ViewAbstract {
     private JButton getDeleteButton(Pet pet) {
         JButton deleteButton = getButton("Delete");
         deleteButton.addActionListener(e -> {
-            viewController.navigateTo(new DeleteView(pet)); //!!!
+            viewController.navigateTo(new DeletePetView(pet)); //!!!
         });
         return deleteButton;
     }

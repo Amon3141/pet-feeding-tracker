@@ -19,9 +19,6 @@ public class PetTest {
         pet1 = new Pet("pet1", 50, "g");
         pet2 = new Pet("pet2", 100, "g");
 
-        r1 = new FeedingRecord(date1, 10);
-        r2 = new FeedingRecord(date2, 10);
-
         try {
             date1 = SDF.parse("2024-01-01");
             date2 = SDF.parse("2024-12-31");
@@ -29,6 +26,9 @@ public class PetTest {
             date1 = new Date();
             date2 = new Date();
         }
+
+        r1 = new FeedingRecord(date1, 10);
+        r2 = new FeedingRecord(date2, 10);
     }
 
     @Test
@@ -49,7 +49,7 @@ public class PetTest {
     @Test
     void testEditFeedingRecordWithOneElement() {
         pet1.feed(r1);
-        pet1.editFeedingRecord(1, date2, 20);
+        pet1.editFeedingRecord(0, date2, 20);
         assertEquals(date2, pet1.getFeedingHistory().get(0).getDate());
         assertEquals(20, pet1.getFeedingHistory().get(0).getAmount());
     }
@@ -58,7 +58,7 @@ public class PetTest {
     void testEditFeedingRecordWithMultipleElement() {
         pet1.feed(r1);
         pet1.feed(r2);
-        pet1.editFeedingRecord(2, date1, 5);
+        pet1.editFeedingRecord(1, date1, 5);
         assertEquals(r1, pet1.getFeedingHistory().get(0));
         assertEquals(date1, pet1.getFeedingHistory().get(1).getDate());
         assertEquals(5, pet1.getFeedingHistory().get(1).getAmount());
@@ -68,8 +68,8 @@ public class PetTest {
     void testEditFeedingRecordWithMultipleElementMultipleTimes() {
         pet1.feed(r1);
         pet1.feed(r2);
-        pet1.editFeedingRecord(2, date1, 10);
-        pet1.editFeedingRecord(1, date2, 30);
+        pet1.editFeedingRecord(1, date1, 10);
+        pet1.editFeedingRecord(0, date2, 30);
         assertEquals(date2, pet1.getFeedingHistory().get(0).getDate());
         assertEquals(30, pet1.getFeedingHistory().get(0).getAmount());
         assertEquals(date1, pet1.getFeedingHistory().get(1).getDate());
@@ -80,7 +80,7 @@ public class PetTest {
     void testDeleteFeedingRecordOnce() {
         pet1.feed(r1);
         pet1.feed(r2);
-        pet1.deleteFeedingRecord(1);
+        pet1.deleteFeedingRecord(0);
         assertEquals(1, pet1.getNumFeedingRecord());
         assertEquals(r2, pet1.getFeedingHistory().get(0));
     }
@@ -89,8 +89,8 @@ public class PetTest {
     void testDeleteFeedingRecordMultipleTimes() {
         pet1.feed(r1);
         pet1.feed(r2);
-        pet1.deleteFeedingRecord(1);
-        pet1.deleteFeedingRecord(1);
+        pet1.deleteFeedingRecord(0);
+        pet1.deleteFeedingRecord(0);
         assertEquals(0, pet1.getNumFeedingRecord());
     }
 

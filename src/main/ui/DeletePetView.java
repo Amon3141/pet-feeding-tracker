@@ -6,11 +6,11 @@ import java.awt.*;
 import javax.swing.*;
 
 // represents the view to delete a pet
-public class DeleteView extends ViewAbstract {
+public class DeletePetView extends ViewAbstract {
     Pet pet;
 
     //EFFECTS: instantiate an object
-    public DeleteView(Pet pet) {
+    public DeletePetView(Pet pet) {
         this.pet = pet;
         this.frameTitle = "Delete a Pet";
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
@@ -42,7 +42,7 @@ public class DeleteView extends ViewAbstract {
     private JButton getYesButton() {
         JButton yesButton = getButton("Yes");
         yesButton.addActionListener(e -> {
-            myPets.deletePet(myPets.getMyPets().indexOf(pet) + 1);
+            myPets.deletePet(myPets.getMyPets().indexOf(pet));
             viewController.navigateTo(new MainView());
         });
         return yesButton;

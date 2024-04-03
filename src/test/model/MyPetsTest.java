@@ -51,7 +51,7 @@ public class MyPetsTest {
     void testEditPetOnce() {
         pets.addPet(pet1);
         pets.addPet(pet3);
-        pets.editPet(1, "Peter", 10, "g");
+        pets.editPet(0, "Peter", 10, "g");
         assertEquals("Peter", pets.getPetAtIndex(0).getName());
         assertEquals(10, pets.getPetAtIndex(0).getTargetAmount());
         assertEquals("g", pets.getPetAtIndex(0).getUnit());
@@ -62,7 +62,7 @@ public class MyPetsTest {
     void testEditPetOnceZeroTarget() {
         pets.addPet(pet1);
         pets.addPet(pet3);
-        pets.editPet(1, "Peter", 0, "g");
+        pets.editPet(0, "Peter", 0, "g");
         assertEquals("Peter", pets.getPetAtIndex(0).getName());
         assertEquals(0, pets.getPetAtIndex(0).getTargetAmount());
         assertEquals("g", pets.getPetAtIndex(0).getUnit());
@@ -73,8 +73,8 @@ public class MyPetsTest {
     void testEditPetMultipleTimes() {
         pets.addPet(pet1);
         pets.addPet(pet3);
-        pets.editPet(2, "Pet", 100, "g");
-        pets.editPet(1, "Stella", 50, "mg");
+        pets.editPet(1, "Pet", 100, "g");
+        pets.editPet(0, "Stella", 50, "mg");
         assertEquals("Stella", pets.getPetAtIndex(0).getName());
         assertEquals(50, pets.getPetAtIndex(0).getTargetAmount());
         assertEquals("mg", pets.getPetAtIndex(0).getUnit());
@@ -87,7 +87,7 @@ public class MyPetsTest {
     void testDeletePetOnce() {
         pets.addPet(pet1);
         pets.addPet(pet3);
-        pets.deletePet(1);
+        pets.deletePet(0);
         assertEquals(1, pets.getNumPets());
         assertEquals(pet3, pets.getPetAtIndex(0));
     }
@@ -96,8 +96,8 @@ public class MyPetsTest {
     void testDeletePetMultipleTimes() {
         pets.addPet(pet1);
         pets.addPet(pet3);
-        pets.deletePet(1);
-        pets.deletePet(1);
+        pets.deletePet(0);
+        pets.deletePet(0);
         assertEquals(0, pets.getNumPets());
     }
 

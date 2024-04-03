@@ -49,8 +49,8 @@ public class EditRecordView extends RecordInfoView {
                 System.out.println("Couldn't parse the date string.");
             }
             double amount = Double.parseDouble(amountField.getText());
-            record.setDate(date);
-            record.setAmount(amount);
+            int recordIndex = pet.getFeedingHistory().indexOf(record);
+            pet.editFeedingRecord(recordIndex, date, amount);
             viewController.navigateTo(new HistoryView(pet));
         });
         return saveButton;

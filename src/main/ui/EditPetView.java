@@ -29,9 +29,11 @@ public class EditPetView extends PetInfoView {
 
         JButton saveButton = getButton("Save");
         saveButton.addActionListener(e -> {
-            pet.setName(nameField.getText());
-            pet.setTargetAmount(Double.parseDouble(targetField.getText()));
-            pet.setUnit(unitField.getText());
+            String name = nameField.getText();
+            double targetAmount = Double.parseDouble(targetField.getText());
+            String unit = unitField.getText();
+            int petIndex = myPets.getMyPets().indexOf(pet);
+            myPets.editPet(petIndex, name, targetAmount, unit);
             viewController.navigateTo(new MainView());
         });
 

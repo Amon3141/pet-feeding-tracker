@@ -34,6 +34,7 @@ public class FeedingRecord implements Writable {
         return this.amount;
     }
 
+    //EFFECTS: returns JSONObject representing this FeedingRecord instance
     @Override
     public JSONObject toJson() {
         JSONObject recordObject = new JSONObject();

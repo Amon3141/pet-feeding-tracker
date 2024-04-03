@@ -57,21 +57,28 @@ public class SaveView extends ViewAbstract {
         return cancelButton;
     }
 
+    //EFFECTS: creates the no button
     private JButton getNoButton() {
         JButton noButton = getButton("No");
-        noButton.addActionListener(e -> System.exit(0));
+        noButton.addActionListener(e -> {
+            ViewController.logEvents();
+            System.exit(0);
+        });
         return noButton;
     }
 
+    //EFFECTS: creates the yes button
     private JButton getYesButton() {
         JButton yesButton = getButton("Yes");
         yesButton.addActionListener(e -> {
             saveData();
+            ViewController.logEvents();
             System.exit(0);
         });
         return yesButton;
     }
 
+    //EFFECTS: saves the current data
     private void saveData() {
         try {
             jsonWriter.open();

@@ -21,28 +21,45 @@ public class MyPets implements Writable {
     public void addPet(Pet pet) {
         if (!contains(pet)) {
             myPets.add(pet);
+
+            String addedPetString = pet.getName() + " (" + pet.getTargetAmount() + pet.getUnit() + " / day)";
+            String logString = "Added a pet: " + addedPetString;
+            EventLog.getInstance().logEvent(new Event(logString));
         } //else {!!! throw Exception}
     }
 
-    //REQUIRES: 1 <= petNum <= this.myPets.size(), !this.contains(newName),
+    //REQUIRES: 0 <= petNum <= this.myPets.size()-1, !this.contains(newName),
     //          newTargetAmount >= 0;
     //MODIFIES: this
     //EFFECTS: edits the pet at petNum, with newName and newTargetAmount(newUnit)
     public void editPet(int petNum, String newName, double newTargetAmount,
                         String newUnit) {
-        int index = petNum - 1;
-        Pet petToEdit = this.myPets.get(index);
+        Pet petToEdit = this.myPets.get(petNum);
+
+        String prePetString = petToEdit.getName() + " (" + petToEdit.getTargetAmount()
+                + petToEdit.getUnit() + " / day)";
+
         petToEdit.setName(newName);
         petToEdit.setTargetAmount(newTargetAmount);
         petToEdit.setUnit(newUnit);
+
+        String postPetString = petToEdit.getName() + " (" + petToEdit.getTargetAmount()
+                + petToEdit.getUnit() + " / day)";
+        String logString = "Edited a pet: " + prePetString + " -> " + postPetString;
+        EventLog.getInstance().logEvent(new Event(logString));
     }
 
-    //REQUIRES: 1 <= petNum <= this.myPets.size()
+    //REQUIRES: 0 <= petNum <= this.myPets.size()-1
     //MODIFIES: this
     //EFFECTS: deletes the Pet with petNum
     public Pet deletePet(int petNum) {
-        int index = petNum - 1;
-        Pet deletedPet = this.myPets.remove(index);
+        Pet deletedPet = this.myPets.remove(petNum);
+
+        String deletedPetString = deletedPet.getName() + " (" + deletedPet.getTargetAmount()
+                + deletedPet.getUnit() + " / day)";
+        String logString = "Deleted a pet: " + deletedPetString;
+        EventLog.getInstance().logEvent(new Event(logString));
+
         return deletedPet;
     }
 
@@ -72,6 +89,7 @@ public class MyPets implements Writable {
         return this.myPets;
     }
 
+    //EFFECTS: returns JSONObject representing this MyPets instance
     @Override
     public JSONObject toJson() {
         JSONObject petsObject = new JSONObject();
